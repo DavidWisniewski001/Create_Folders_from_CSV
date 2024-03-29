@@ -1,0 +1,23 @@
+import os
+import csv
+
+def create_folders_from_csv(csv_file_path, output_folder):
+    # Create the output folder if it doesn't exist
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    # Read the CSV file and extract the strings from the first column
+    with open(csv_file_path, 'r') as file:
+        csv_reader = csv.reader(file)
+        for row in csv_reader:
+            # Assuming the first column contains the strings
+            string_value = row[0].strip()
+            # Create a folder for each string
+            folder_path = os.path.join(output_folder, string_value)
+            os.makedirs(folder_path, exist_ok=True)
+            print(f"Created folder: {folder_path}")
+
+# Example usage
+csv_file_path = 'YOUR.csv'  # Update with your CSV file path
+output_folder = 'Your_folder_Path_HERE'  # Update with your desired output folder path
+create_folders_from_csv(csv_file_path, output_folder)
